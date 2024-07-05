@@ -2,20 +2,11 @@
 
 # Network Task Distribution Simulator (Random Assignment)
 
-This project is a network task distribution simulator designed to evaluate the performance of a distributed network under varying load conditions. The simulator distributes tasks randomly across a network of nodes, allowing for replicated workloads and nodes capable of handling multiple simultaneous jobs. The execution time for each task is constant.
+A network simulator designed for emulating random assignment of tasks under varying load conditions. The simulator allows for replicated workloads and nodes capable of handling multiple simultaneous jobs. Execution times for each task are constant for simplicity.
 
-The simulator is designed specifically to test random assignment of workloads rather than rely on orchestrators or communication strategies between nodes.
+Frames can be executed one after another to simulate a constant load over time to discover bottlenecks and failure points, and the simulation can be re-run over multiple iterations to average the results from each.
 
-## Attributes
-
-- **Random Task Assignment**: Tasks are assigned randomly to nodes in the network.
-- **Replicated Workloads**: Each task can be replicated across multiple nodes (`k`).
-- **Simultaneous Jobs**: Each node can handle multiple tasks simultaneously (`m`).
-- **Constant Execution Time**: The execution time for each task is fixed (`t`).
-
-## How It Works
-
-The simulator distributes tasks randomly among nodes and simulates the execution of these tasks over a specified number of frames. It provides insights into the network's capacity to handle tasks and the growth patterns of task queues under different load conditions.
+This simulator demonstrates workload distirbution in an environment lacking orchestrators or communication strategies (such as a gossip protocol) between nodes.
 
 ### Key Concepts
 
@@ -28,7 +19,7 @@ The simulator distributes tasks randomly among nodes and simulates the execution
    - `k`: Number of nodes required to handle each task (replication factor).
    - `m`: Maximum number of workloads a single node can handle simultaneously.
    - `t`: Time per workload (constant).
-   - `frames`: Number of frames (additional task loads) to run.
+   - `f`: Number of consecutive frames to run.
    - `c`: Targeted network capacity as a fraction of the estimated capacity.
    - `i`: Number of iterations to run (results are averaged)
 
@@ -128,8 +119,8 @@ The core functions of the simulator include:
 - `run_frame`: Executes a single frame of task distribution and workload reduction.
 - `simulate_task_distribution`: Runs the full simulation and calculates performance metrics.
 
-The difference between iterations and frames:
-- frames represent a new workload added to the network (based on the specified capacity) after a reduction in completed tasks
+The difference between frames and iterations:
+- frames represent a new aggregate workload added to the network (based on the specified capacity) after a reduction in completed tasks
 - iterations repeat the entire simulation and average the results
 
 ## AI Attribution
